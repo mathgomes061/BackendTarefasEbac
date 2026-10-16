@@ -3,6 +3,7 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseModel
 from typing import Optional
 import secrets
+import os
 
 from sqlalchemy import (
     create_engine,
@@ -19,15 +20,27 @@ from sqlalchemy.orm import (
 )
 from sqlalchemy.exc import SQLAlchemyError
 
-DATABASE_URL = "sqlite:///./tarefas.db"
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if DATABASE_URL is None:
+    raise ValueError("A variável de ambiente DATABASE_URL não foi definida.")
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 app = FastAPI()
 
-MEU_USUARIO = "admin"
-MINHA_SENHA = "admin"
+MEU_USUARIO_ENV = os.getenv("MEU_USUARIO")
+MINHA_SENHA_ENV = os.getenv("MINHA_SENHA")
+
+if MEU_USUARIO_ENV is None:
+    raise ValueError("A variável de ambiente MY_USER não foi definida.")
+
+if MINHA_SENHA_ENV is None:
+    raise ValueError("A variável de ambiente MY_PASSWORD não foi definida.")
+
+MEU_USUARIO: str = MEU_USUARIO_ENV
+MINHA_SENHA: str = MINHA_SENHA_ENV
 
 security = HTTPBasic()
 
