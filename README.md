@@ -166,16 +166,16 @@ podman compose down
 
 Observação: o comando podman compose utiliza um provedor externo de Compose, como podman-compose ou Docker Compose. Se nenhum provedor estiver disponível, instale ou configure um compatível com sua instalação.
 
-Endpoints disponíveis
+## Endpoints disponíveis
 
 Todas as rotas abaixo exigem autenticação HTTP Basic.
 
-Método	Endpoint	Descrição
-POST	/adicionar	Cadastra uma nova tarefa
-GET	/tarefas	Lista tarefas com paginação e ordenação
-PUT	/atualizar/{nome}	Atualiza o estado de conclusão de uma tarefa
-DELETE	/deletar/{nome}	Exclui uma tarefa pelo nome
-Cadastro de tarefa
+| Método | Endpoint             | Descrição                                      |
+|--------|----------------------|------------------------------------------------|
+| POST   | `/adicionar`         | Cadastra uma nova tarefa                       |
+| GET    | `/tarefas`           | Lista tarefas com paginação e ordenação        |
+| PUT    | `/atualizar/{nome}`  | Atualiza o estado de conclusão de uma tarefa   |
+| DELETE | `/deletar/{nome}`    | Exclui uma tarefa pelo nome                    |
 
 Endpoint: POST /adicionar
 
